@@ -9,6 +9,7 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
@@ -31,19 +32,20 @@ import java.io.IOException;
 //클래스 레벨에서 빈 구성정보를 가진 클래스임을 전달하는 어노테이션
 //: 빈 팩토리 메서드 뿐만 아니라, 전체 애플리케이션 구성 정보를 가진다.
 @Configuration
+@ComponentScan
 public class HellobootApplication {
-    //스프링 컨테이너에게 빈으로 등록해달라고 전달하는 어노테이션
-    @Bean
-    //자바코드 구성 정보 사용을 위한 팩토리 메서드 작성
-    //: 서비스에 의존하는 컨트롤러의 인자로 서비스를 받도록 스프링 컨테이너에게 요청
-    public HelloController helloController(HelloService helloService){
-        return new HelloController(helloService);
-    }
-    @Bean
-    //반환타입을 인터페이스로 설정해, 변경에 유연함을 더한다.
-    public HelloService helloService(){
-        return new SimpleHelloService();
-    }
+//    //스프링 컨테이너에게 빈으로 등록해달라고 전달하는 어노테이션
+//    @Bean
+//    //자바코드 구성 정보 사용을 위한 팩토리 메서드 작성
+//    //: 서비스에 의존하는 컨트롤러의 인자로 서비스를 받도록 스프링 컨테이너에게 요청
+//    public HelloController helloController(HelloService helloService){
+//        return new HelloController(helloService);
+//    }
+//    @Bean
+//    //반환타입을 인터페이스로 설정해, 변경에 유연함을 더한다.
+//    public HelloService helloService(){
+//        return new SimpleHelloService();
+//    }
 
     public static void main(String[] args) {
         //스프링 컨테이너를 위한 인터페이스를 이용해 스프링 컨테이너 생성

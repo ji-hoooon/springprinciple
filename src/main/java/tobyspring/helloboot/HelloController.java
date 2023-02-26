@@ -3,10 +3,8 @@ package tobyspring.helloboot;
 //컨트롤러 작성
 //: 스프링 컨테이너 안에서 마치 웹 컨테이너 안에 있는 웹 컴포넌트처럼 웹의 요청을 받아 결과를 응답하는 역할 수행
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -34,9 +32,11 @@ import java.util.Objects;
 //(3) 비즈니스 로직으로부터 돌려받은 결과를 유저가 원하는 형태로 가공해 응답한다.
 
 //클래스 레벨에서 매핑 정보를 담고 있다 것을 명시하는 어노테이션
-@RequestMapping
-//리턴하는 값이 뷰이름이 아니라 text/plain이라고 명시하는 어노테이션
-@ResponseBody
+//@RequestMapping
+////리턴하는 값이 뷰이름이 아니라 text/plain이라고 명시하는 어노테이션
+//@ResponseBody
+//@MyComponent
+@RestController
 public class HelloController {
     //재사용을 위해 변수로 선언 -> private final로 선언하면 재선언이 불가능 -> 생성자 파라미터로 받게 생성자 작성
     private final HelloService helloService;
