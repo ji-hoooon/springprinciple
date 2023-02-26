@@ -3,6 +3,9 @@ package tobyspring.helloboot;
 //컨트롤러 작성
 //: 스프링 컨테이너 안에서 마치 웹 컨테이너 안에 있는 웹 컴포넌트처럼 웹의 요청을 받아 결과를 응답하는 역할 수행
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,11 +40,14 @@ import java.util.Objects;
 //@ResponseBody
 //@MyComponent
 @RestController
+//public class HelloController implements ApplicationContextAware {
 public class HelloController {
     //재사용을 위해 변수로 선언 -> private final로 선언하면 재선언이 불가능 -> 생성자 파라미터로 받게 생성자 작성
     private final HelloService helloService;
-    public HelloController(HelloService helloService) {
+    private final ApplicationContext applicationContext;
+    public HelloController(HelloService helloService, ApplicationContext applicationContext) {
         this.helloService = helloService;
+        this.applicationContext=applicationContext;
     }
     @GetMapping("/hello")
 //    @RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -59,4 +65,9 @@ public class HelloController {
 //        return helloService.sayHello(StringUtils.isEmpty(name)?"null":name);
     }
 
+//    @Override
+//    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+//        System.out.println(applicationContext);
+//        this.applicationContext=applicationContext;
+//    }
 }
