@@ -43,16 +43,12 @@ public class HelloController {
     public HelloController(HelloService helloService) {
         this.helloService = helloService;
     }
-
     @GetMapping("/hello")
 //    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(String name){
 //        return "Hello "+ name;  //바디에 전달되는 데이터
         //직접 서비스 객체 생성 -> 스프링 컨테이너가 HelloController 객체 생성시, 생성자 파라미터로 주입받도록 변경
 //        SimpleHelloService helloService=new SimpleHelloService();
-
-
-
         //(1) 유효성 검증
         //기본적인 널체크 코드
 //        if(name==null)
