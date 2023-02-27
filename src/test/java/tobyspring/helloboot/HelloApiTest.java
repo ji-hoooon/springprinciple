@@ -51,7 +51,7 @@ public class HelloApiTest {
         assertThat(res.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE);
 
         //(3) 바디의 내용
-        assertThat(res.getBody()).isEqualTo("Hello Spring");
+        assertThat(res.getBody()).isEqualTo("*Hello Spring*");
     }
 
     @Test

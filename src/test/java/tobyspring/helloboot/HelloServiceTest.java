@@ -3,6 +3,7 @@ package tobyspring.helloboot;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HelloServiceTest {
@@ -14,5 +15,13 @@ public class HelloServiceTest {
 
         //Live Templates을 이용해 asj 만들기
         assertThat(ret).isEqualTo("Hello Test");
+    }
+
+    @Test
+    void helloDecorator(){
+        HelloDecorator helloDecorator=new HelloDecorator(name -> name);
+
+        String ret =helloDecorator.sayHello("Test");
+        assertThat(ret).isEqualTo("*Test*");
     }
 }
