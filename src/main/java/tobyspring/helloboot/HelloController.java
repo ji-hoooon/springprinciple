@@ -7,6 +7,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -44,10 +45,13 @@ import java.util.Objects;
 public class HelloController {
     //재사용을 위해 변수로 선언 -> private final로 선언하면 재선언이 불가능 -> 생성자 파라미터로 받게 생성자 작성
     private final HelloService helloService;
-    private final ApplicationContext applicationContext;
-    public HelloController(HelloService helloService, ApplicationContext applicationContext) {
-        this.helloService = helloService;
-        this.applicationContext=applicationContext;
+//    private final ApplicationContext applicationContext;
+//    public HelloController(HelloService helloService, ApplicationContext applicationContext) {
+//        this.helloService = helloService;
+//        this.applicationContext=applicationContext;
+//    }
+    public HelloController(HelloService helloService){
+        this.helloService= helloService;
     }
     @GetMapping("/hello")
 //    @RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -56,8 +60,14 @@ public class HelloController {
         //직접 서비스 객체 생성 -> 스프링 컨테이너가 HelloController 객체 생성시, 생성자 파라미터로 주입받도록 변경
 //        SimpleHelloService helloService=new SimpleHelloService();
         //(1) 유효성 검증
-        //기본적인 널체크 코드
-//        if(name==null)
+        //기본적인 널체크 코드 + 빈 문자열을 체크하는 코드 작성
+        // -> IllegalArgumentException : 적합하지 않거나(illegal) 적절하지 못한(inappropriate) 인자를 메소드에 넘겨주었을 때 발생하는 예외
+//        if(name==null || name.length() == 0 )throw new NullPointerException();
+        //trim을 이용해 공백 제거 후 빈 문자열 체크하는 코드
+//        if(name==null || name.trim().length() == 0 )throw new IllegalArgumentException();
+        //StringUtils 클래스를 이용해 앞뒤 공백을 제거한 후에 빈 문자열 체크하도록 개선.
+        if(name==null || StringUtils.trimAllWhitespace(name).length() == 0 )throw new IllegalArgumentException();
+
 //        return helloService.sayHello(name);
         //유틸 클래스 Objects를 이용한 널체크 코드
         return helloService.sayHello(Objects.requireNonNull(name));
