@@ -1,7 +1,11 @@
-package tobyspring.helloboot;
+package tobyspring.helloboot.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import tobyspring.helloboot.config.EnableMyAutoConfiguration;
+import tobyspring.helloboot.config.autoconfig.DispatcherServletConfig;
+import tobyspring.helloboot.config.autoconfig.TomcatWebServerConfig;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -16,6 +20,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Configuration
 @ComponentScan
-
+//AutoConfiguration을 위해 클래스를 구성정보에 추가
+//@Import(Config.class)
+//@Import({TomcatWebServerConfig.class,DispatcherServletConfig.class})
+//Import할 클래스가 많아지기 때문에 -> EnableMyAutoConfiguration 어노테이션으로 통합
+@EnableMyAutoConfiguration
 public @interface MySpringBootApplication {
 }
