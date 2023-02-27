@@ -1,9 +1,7 @@
-package tobyspring.helloboot.config;
+package tobyspring.config;
 
 
 import org.springframework.context.annotation.Import;
-import tobyspring.helloboot.config.autoconfig.DispatcherServletConfig;
-import tobyspring.helloboot.config.autoconfig.TomcatWebServerConfig;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

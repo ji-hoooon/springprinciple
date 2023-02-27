@@ -1,7 +1,7 @@
 package tobyspring.helloboot;
 
 import org.springframework.boot.SpringApplication;
-import tobyspring.helloboot.config.MySpringBootApplication;
+import tobyspring.config.MySpringBootApplication;
 
 //클래스 레벨에서 빈 구성정보를 가진 클래스임을 전달하는 어노테이션
 //: 빈 팩토리 메서드 뿐만 아니라, 전체 애플리케이션 구성 정보를 가진다.
