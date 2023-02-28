@@ -4,8 +4,10 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import tobyspring.config.MyAutoConfiguration;
 
-@Configuration
+//@Configuration
+@MyAutoConfiguration
 public class TomcatWebServerConfig {
     //구성정보를 나타내는 서블릿웹서버팩토리 객체와, 디스패처서블릿 객체를 빈으로 등록
     @Bean

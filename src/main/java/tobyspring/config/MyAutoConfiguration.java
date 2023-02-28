@@ -11,6 +11,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 //이 어노테이션을 붙이면 구성정보를 담은 클래스라는 것을 알려주는 어노테이션을 메타 어노테이션으로 설정
-@Configuration
+//기본값
+//@Configuration(proxyBeanMethods = true)
+//proxyBeanMethods 설정을 false로 변경
+@Configuration(proxyBeanMethods = false)
 public @interface MyAutoConfiguration {
 }
