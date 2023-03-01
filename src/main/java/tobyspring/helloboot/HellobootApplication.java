@@ -1,13 +1,16 @@
 package tobyspring.helloboot;
 
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import tobyspring.config.MySpringBootApplication;
 
 //클래스 레벨에서 빈 구성정보를 가진 클래스임을 전달하는 어노테이션
 //: 빈 팩토리 메서드 뿐만 아니라, 전체 애플리케이션 구성 정보를 가진다.
 //@Configuration
 //@ComponentScan
-
 //합성 어노테이션으로 변경
 @MySpringBootApplication
 public class HellobootApplication {
@@ -15,6 +18,16 @@ public class HellobootApplication {
 //        MySpringApplication.run(HellobootApplication.class, args);
 //    }
 
+    //초기화 작업, 컨테이너 기능을 수행해 간단하게 확인할 경우에 사용하는 방법
+    @Bean
+    //빈 생성시 다른 빈을 주입
+    //: 스프링이 제공하는 환경정보를 추상화한 객
+    ApplicationRunner applicationRunner(Environment env){
+        return args -> {
+            String name = env.getProperty("my.name");
+            System.out.println("my.name: "+name);
+        };
+    }
     public static void main(String[] args) {
         SpringApplication.run(HellobootApplication.class, args);
     }
