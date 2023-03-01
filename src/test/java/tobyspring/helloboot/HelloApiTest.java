@@ -29,7 +29,7 @@ public class HelloApiTest {
         //웹 응답의 모든 요소를 가지고 있는 객체 타입으로 변수를 받기 위해 ResponseEntity 이용
         //: introduce local variable - option+enter
         ResponseEntity<String> res =
-                rest.getForEntity("http://localhost:8080/hello?name={name}", String.class, "Spring");
+                rest.getForEntity("http://localhost:8080/app/hello?name={name}", String.class, "Spring");
 
 
         //응답 검증 3가지
@@ -72,7 +72,7 @@ public class HelloApiTest {
         //웹 응답의 모든 요소를 가지고 있는 객체 타입으로 변수를 받기 위해 ResponseEntity 이용
         //: introduce local variable - option+enter
         ResponseEntity<String> res =
-                rest.getForEntity("http://localhost:8080/hello?name=", String.class);
+                rest.getForEntity("http://localhost:8080/app/hello?name=", String.class);
 
 
         //응답 검증 3가지

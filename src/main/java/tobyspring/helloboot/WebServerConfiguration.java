@@ -5,7 +5,8 @@ import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+//기존의 TomcatWebServerConfig 사용을 위해 주석처리
+//@Configuration(proxyBeanMethods = false)
 public class WebServerConfiguration {
     @Bean
     ServletWebServerFactory customerWebServerFactory(){
