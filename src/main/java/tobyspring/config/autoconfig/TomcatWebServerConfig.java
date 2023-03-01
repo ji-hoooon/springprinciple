@@ -1,5 +1,6 @@
 package tobyspring.config.autoconfig;
 
+import org.apache.catalina.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -18,12 +19,18 @@ import tobyspring.config.MyAutoConfiguration;
 //직접 작성한 커스텀 어노테이션으로 대체
 @ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
 @MyAutoConfiguration
+//사용할 프로퍼티 클래스를 직접 임포트
+@Import(ServerProperties.class)
 public class TomcatWebServerConfig {
 
     //치환자를 이용해 프로퍼티값을 가져온다.
     //: 해당 빈이 생성된 이후에 치환자에 프로퍼티값이 채워지게 되므로, 빈 메서드에서 사용가능한 필드가 된다.
-    @Value("${contextPath}")
-    String contextPath;
+//    @Value("${contextPath:}")
+//    String contextPath;
+//
+//    @Value("${port : 8080}")
+//    int port;
+    //: 프로퍼티를 담은 클래스로 추출
 
     //구성정보를 나타내는 서블릿웹서버팩토리 객체와, 디스패처서블릿 객체를 빈으로 등록
     @Bean("TomcatWebServerFactory")
@@ -41,7 +48,9 @@ public class TomcatWebServerConfig {
     //property값을 읽어서 지정하는 방법을 적용하기 위해 Environment 객체를 주입 (빈 메서드이기 때문에 주입 가능)
 //    public ServletWebServerFactory servletWebServerFactory(Environment env){
     //빈 클래스의 필드를 가져오는 방법으로 변경
-    public ServletWebServerFactory servletWebServerFactory(){
+//    public ServletWebServerFactory servletWebServerFactory(){
+    //프로퍼티를 담은 빈을 파라미터로 전달
+    public ServletWebServerFactory servletWebServerFactory(ServerProperties properties){
 
         TomcatServletWebServerFactory factory=new TomcatServletWebServerFactory();
         //add, set 등등 다양한 메서드 존재
@@ -50,10 +59,15 @@ public class TomcatWebServerConfig {
         //application.properties에 지정
 //        factory.setContextPath(env.getProperty("contextPath"));
         //빈 클래스에 필드를 이용
-        factory.setContextPath(this.contextPath);
+        factory.setContextPath(properties.getContextPath());
+        //해당 필드 이름의 프로퍼티가 존재하지 않는 경우 : 에러 발생
+        //-> 기본값을 넣어서 에러 발생하지 않도록 설정
+        factory.setPort(properties.getPort());
+
         return factory;
     }
     //디스패처가 사용할 컨트롤러를 찾기 위해 컨트롤러를 넘겨주기 위해 애플리케이션 컨텍스트를 생성자의 파라미터로 전달
+
 
 
 //    static class TomcatCondition implements Condition {

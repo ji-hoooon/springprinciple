@@ -15,15 +15,15 @@ public class ConfigurationTest {
     //자바 코드에 의해 빈 오브젝트를 생성하고, 다른 오브젝트와의 관계를 설정한다.
     @Test
     void configuration1(){
-        //isSameAs의 경우 주소값까지 똑같은지 비교하는 메서드
-        assertThat(new Common()).isSameAs(new Common());
+        //isSameAs의 경우 주소값까지 똑같지 않은지 비교하는 메서드
+        assertThat(new Common()).isNotSameAs(new Common());
 
         //MyConfig을 이용해 비교할 경우 common은 서로 다른 오브젝트
         MyConfig myConfig = new MyConfig();
         Bean1 bean1=myConfig.bean1();
         Bean2 bean2=myConfig.bean2();
 
-        assertThat(bean1.common).isSameAs(bean2.common);
+        assertThat(bean1.common).isNotSameAs(bean2.common);
     }
     @Test
     void configuration2(){
