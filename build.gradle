@@ -25,11 +25,26 @@ dependencies {
 //        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
 //    }
 //    implementation 'org.springframework.boot:spring-boot-starter-jetty'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.projectlombok:lombok'
+    implementation('org.springframework:spring-jdbc')
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+
+    runtimeOnly('com.h2database:h2:2.1.214')
+    // https://mvnrepository.com/artifact/hikari-cp/hikari-cp
+//    implementation group: 'hikari-cp', name: 'hikari-cp', version: '3.0.1'
+
+
+//    implementation 'com.h2database:h2:2.1.214'
+    //코드에서 h2 DB를 직접 사용할일은 없기 때문에 runtimeOnly로 변경
+
+    //ctrl+enter로 add dependencies 가능
+
+
+
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+//    compileOnly 'org.projectlombok:lombok'
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//    annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {

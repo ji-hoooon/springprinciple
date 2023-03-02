@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import tobyspring.config.MyAutoConfiguration;
 import tobyspring.config.MyConfigurationProperties;
 
+import java.util.Map;
+
 @MyAutoConfiguration
 public class PropertyPostProcessorConfig {
     @Bean
@@ -25,11 +27,15 @@ public class PropertyPostProcessorConfig {
                 //해당 어노테이션이 아니면 바로 리턴
                 if(annotation==null) return bean;
 
+                //prefix를 지정한 값을 알아내기 위해 AnnotationUtils의 getAnnotationAttributes()
+                Map<String, Object> attrs = AnnotationUtils.getAnnotationAttributes(annotation);
+                String prefix = (String) attrs.get("prefix");
+
                 //해당 어노테이션이 붙은 클래스는 모두 프로퍼티 주입이 필요한 클래스이므로 프로퍼티 주입 수행
-
-
                 //바인딩시 예외처리까지 수행하는 메서드 :bindOrCreate() 바인드하려고 했는데 존재하지 않으면 새로 만들어서 리턴
-                return Binder.get(env).bindOrCreate("", bean.getClass());
+//                return Binder.get(env).bindOrCreate("", bean.getClass());
+                //바인딩시 prefix를 붙여서 뒤에 나오는 이름이 프로퍼티 이름과 일치여부를 체크한다.
+                return Binder.get(env).bindOrCreate(prefix, bean.getClass());
             }
         };
     }

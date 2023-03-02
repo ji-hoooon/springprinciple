@@ -5,7 +5,7 @@ import tobyspring.config.MyConfigurationProperties;
 
 //@MyConfigurationProperties에 포함시킨다.
 //@Component
-@MyConfigurationProperties
+@MyConfigurationProperties(prefix="server")
 public class ServerProperties {
     private String contextPath;
     private int port;
