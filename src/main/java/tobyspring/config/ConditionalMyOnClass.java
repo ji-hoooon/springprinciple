@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Conditional(MyOnClassCondition.class)
 public @interface ConditionalMyOnClass {
     //컨디션에서 읽을 수 있는 속성(엘리먼트) 값을 제공하는 역할

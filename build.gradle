@@ -30,7 +30,8 @@ dependencies {
 
     runtimeOnly('com.h2database:h2:2.1.214')
     // https://mvnrepository.com/artifact/hikari-cp/hikari-cp
-//    implementation group: 'hikari-cp', name: 'hikari-cp', version: '3.0.1'
+//    implementation 'hikari-cp:hika/**/ri-cp:3.0.1'
+    implementation('com.zaxxer:HikariCP')
 
 
 //    implementation 'com.h2database:h2:2.1.214'
@@ -40,7 +41,7 @@ dependencies {
 
 
 
-//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 //    compileOnly 'org.projectlombok:lombok'
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
