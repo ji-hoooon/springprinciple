@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -22,5 +23,7 @@ import java.lang.annotation.Target;
 //외부설정을 위한 자동구성편에서도 얘기했듯, application.properties를 이용한 등록은
 //스프링 부트 초기화 과정에서 추가해줘야한다.
 @TestPropertySource("classpath:/application.properties")
+//새로운 트랜잭션 시작하게 하는 선언형 어노테이션
+@Transactional
 public @interface HellobootTest {
 }
