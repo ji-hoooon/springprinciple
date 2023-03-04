@@ -1,19 +1,39 @@
 package tobyspring.helloboot;
 
-import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import tobyspring.config.MySpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.annotation.PostConstruct;
 
 //클래스 레벨에서 빈 구성정보를 가진 클래스임을 전달하는 어노테이션
 //: 빈 팩토리 메서드 뿐만 아니라, 전체 애플리케이션 구성 정보를 가진다.
 //@Configuration
 //@ComponentScan
 //합성 어노테이션으로 변경
-@MySpringBootApplication
+//@MySpringBootApplication
+@SpringBootApplication
 public class HellobootApplication {
+    private final JdbcTemplate jdbcTemplate;
+
+    public HellobootApplication(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    //자바 표준 어노테이션으로 스프링 프레임워크에 존재하던 라이프사이클 인터페이스를 쉽게 사용가능
+    //스프링 프레임워크에 존재하던 라이프사이클 인터페이스 : implements InitializingBean
+    //implements InitializingBean이 @PostConstruct의 init()을 찾아서 실행시켜준다.
+
+    @PostConstruct
+    // :스프링 부트 애플리케이션이 모든 준비가 끝나면 실행되는 메서드
+    void init(){
+        jdbcTemplate.execute("create table if not exists hello(name varchar(50) primary key, count int)");
+    }
+
+
     //    public static void main(String[] args) {
 //        MySpringApplication.run(HellobootApplication.class, args);
 //    }

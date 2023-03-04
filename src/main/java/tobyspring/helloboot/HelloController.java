@@ -80,4 +80,11 @@ public class HelloController {
 //        System.out.println(applicationContext);
 //        this.applicationContext=applicationContext;
 //    }
+
+
+    //count가 올라가는지 API로 테스트하기 위한 메서드
+    @GetMapping("/count")
+    public String count(String name){
+        return name+" :"+helloService.countOf(name);
+    }
 }

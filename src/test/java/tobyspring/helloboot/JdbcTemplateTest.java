@@ -4,12 +4,14 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.annotation.Rollback;
 
-@HellobootTest
 //롤백 되는게 맞는지 확인하기 위한 어노테이션
 //@Rollback(value = false)
+//@HellobootTest
+//Jdbc관련된 빈만 로딩하는 JdbcTest로 변경
+@JdbcTest
 public class JdbcTemplateTest {
     //테스트를 위한 의존성 주입
     @Autowired

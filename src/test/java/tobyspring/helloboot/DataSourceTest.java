@@ -1,11 +1,8 @@
 package tobyspring.helloboot;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
@@ -23,7 +20,9 @@ import java.sql.SQLException;
 ////스프링 부트 초기화 과정에서 추가해줘야한다.
 //@TestPropertySource("classpath:/application.properties")
 //-> 어노테이션이 너무 많으므로, 하나의 어노테이션으로 합성한다.
-@HellobootTest
+//@HellobootTest
+//Jdbc관련된 빈만 로딩하는 JdbcTest로 변경
+@JdbcTest
 
 //테스트가 독립적으로 수행되게 하기 위해서 클래스 전체를 트랜잭션으로
 @Transactional

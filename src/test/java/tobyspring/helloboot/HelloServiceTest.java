@@ -1,6 +1,5 @@
 package tobyspring.helloboot;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.lang.annotation.ElementType;
@@ -8,7 +7,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 @Retention(RetentionPolicy.RUNTIME)
 
@@ -29,7 +27,10 @@ public class HelloServiceTest {
     @FastUnitTest
 //    @UnitTest
     void simpleHelloService(){
-        SimpleHelloService helloService = new SimpleHelloService();
+
+        //스프링 컨테이너를 띄우지 않고 코드상에서 단위 테스트를 수행하던 메서드지만, 현재는 DB에 연결된 상태
+        //: 하지만 해당 메서드의 목적에 부합하도록 단순하게 helloRepository만 생성해서 전달하도록 변경
+        SimpleHelloService helloService = new SimpleHelloService(helloRepositoryStub);
 
         String ret= helloService.sayHello("Test");
 
@@ -37,9 +38,27 @@ public class HelloServiceTest {
         assertThat(ret).isEqualTo("Hello Test");
     }
 
+    private static HelloRepository helloRepositoryStub = new HelloRepository()  {
+            @Override
+            public Hello findHello(String name) {
+                return null;
+            }
+
+            @Override
+            public Hello findHelloOld(String name) {
+                return null;
+            }
+
+            @Override
+            public void increaseCount(String name) {
+
+            }
+        };
+
     @Test
     void helloDecorator(){
         HelloDecorator helloDecorator=new HelloDecorator(name -> name);
+
 
         String ret =helloDecorator.sayHello("Test");
         assertThat(ret).isEqualTo("*Test*");
