@@ -30,7 +30,7 @@ public class HelloRepositoryTest {
 //        jdbcTemplate.execute("create table if not exists hello(name varchar(50) primary key, count int)");
 //    }
 
-//    @Test
+    //    @Test
 //    //찾는게 없을 때 null인지 테스트
 //    //-> 실패 : queryForObject()메서드의 경우 없을 때 null이 아니라 예외발생
 //    void findHelloFailedOld(){
